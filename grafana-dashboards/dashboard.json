@@ -359,6 +359,115 @@
             "title": "Panel Title",
             "transformations": [],
             "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "postgres",
+                "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 24,
+                "x": 0,
+                "y": 12
+            },
+            "id": 4,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "postgres",
+                        "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                    },
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "SELECT \n    athletes.first_name AS athlete,\n    results.value AS distance,\n    results.date AS time,\n    SUM(results.value::float) OVER (\n        PARTITION BY athletes.id \n        ORDER BY results.date\n    ) AS cumulative_distance\nFROM results \nINNER JOIN athletes ON results.athlete_id = athletes.id \nINNER JOIN metrics ON results.metric_id = metrics.id \nWHERE metrics.id = 'distance_run' \nORDER BY time;",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "parameters": [],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    }
+                }
+            ],
+            "title": "Distance Cumulative",
+            "type": "timeseries"
         }
     ],
     "refresh": false,
@@ -369,13 +478,13 @@
         "list": []
     },
     "time": {
-        "from": "2023-05-08T08:28:39.944Z",
-        "to": "2023-05-09T08:28:39.944Z"
+        "from": "now/y",
+        "to": "now/y"
     },
     "timepicker": {},
     "timezone": "",
     "title": "General Dashboard",
     "uid": "a22dfa2a-d04c-4cff-baf4-098b9a302009",
-    "version": 3,
+    "version": 4,
     "weekStart": ""
 }
