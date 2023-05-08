@@ -8,6 +8,8 @@ services:
             - '3000:3000'
         volumes:
             - ./gfdata:/var/lib/grafana
+        depends_on:
+            - postgres
 
     postgres:
         image: postgres:latest

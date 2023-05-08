@@ -8,15 +8,15 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 const METRICS = [
     {
-        metricId: 'distance_run',
+        id: 'distance_run',
         valueFn: (activity) => activity.distance / 1000,
     },
     {
-        metricId: 'time_run',
-        valueFn: (activity) => activity.moving_time,
+        id: 'time_run',
+        valueFn: (activity) => activity.moving_time / 60,
     },
     {
-        metricId: 'speed_run',
+        id: 'speed_run',
         valueFn: (activity) => (activity.distance / activity.moving_time) * 3.6,
     },
 ];
@@ -54,8 +54,8 @@ const METRICS = [
                 const date = moment.utc(activity.start_date_local).format('YYYY-MM-DD HH:00:00');
                 return METRICS.map((metric) => ({
                     athleteId: athleteId,
-                    name: metric.metricId,
-                    value: metric.valueFn(activity),
+                    id: metric.id,
+                    value: metric.valueFn(activity).toFixed(2),
                     date,
                 }));
             })
