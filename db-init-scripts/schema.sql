@@ -15,5 +15,10 @@ CREATE TABLE results (
   athlete_id INTEGER REFERENCES athletes(id),
   metric_id INTEGER REFERENCES metrics(id),
   value NUMERIC NOT NULL,
-  date TIMESTAMP NOT NULL
+  date TIMESTAMP NOT NULL,
+  CONSTRAINT results_unique_key UNIQUE (athlete_id, metric_id, date)
 );
+
+INSERT INTO athletes (id, first_name, last_name)
+VALUES
+(70861920, 'Théo', 'Laperrouse')

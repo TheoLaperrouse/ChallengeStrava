@@ -1,8 +1,6 @@
 import Bree from 'bree';
 import Graceful from '@ladjs/graceful';
 
-console.log('Launch strava-data-provider...');
-
 export const bree = new Bree({
     jobs: [
         {

@@ -1,19 +1,19 @@
 {
     "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "grafana",
-            "uid": "-- Grafana --"
-          },
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
-        }
-      ]
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
     },
     "editable": true,
     "fiscalYearStartMonth": 0,
@@ -22,91 +22,89 @@
     "links": [],
     "liveNow": false,
     "panels": [
-      {
-        "datasource": {
-          "uid": "PostgreSQL"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 10,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 1,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
-          "showHeader": false,
-          "sortBy": [
-            {
-              "desc": true,
-              "displayName": "Time"
-            }
-          ],
-          "title": "Top 10 Athletes by Distance"
-        },
-        "pluginVersion": "9.5.1",
-        "targets": [
-          {
+        {
             "datasource": {
-              "uid": "PostgreSQL"
+                "uid": "PostgreSQL"
             },
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "distance",
-            "queryType": "table",
-            "rawQuery": true,
-            "rawSql": "SELECT first_name || ' ' || last_name AS Athlete, SUM(value) AS Distance FROM results INNER JOIN athletes ON results.athlete_id = athletes.id INNER JOIN metrics ON results.metric_id = metrics.id WHERE metrics.name = 'Distance' GROUP BY Athlete ORDER BY Distance DESC LIMIT 10",
-            "refId": "A"
-          }
-        ],
-        "title": "Top 10 Athletes by Distance",
-        "type": "table"
-      }
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": ["sum"],
+                    "show": false
+                },
+                "showHeader": false,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "Time"
+                    }
+                ],
+                "title": "Top 10 Athletes by Distance"
+            },
+            "pluginVersion": "9.5.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "uid": "PostgreSQL"
+                    },
+                    "format": "time_series",
+                    "group": [],
+                    "metricColumn": "distance",
+                    "queryType": "table",
+                    "rawQuery": true,
+                    "rawSql": "SELECT first_name || ' ' || last_name AS Athlete, SUM(value) AS Distance FROM results INNER JOIN athletes ON results.athlete_id = athletes.id INNER JOIN metrics ON results.metric_id = metrics.id WHERE metrics.name = 'Distance' GROUP BY Athlete ORDER BY Distance DESC LIMIT 10",
+                    "refId": "A"
+                }
+            ],
+            "title": "Top 10 Athletes by Distance",
+            "type": "table"
+        }
     ],
     "refresh": "",
     "schemaVersion": 38,
     "style": "dark",
     "tags": [],
     "templating": {
-      "list": []
+        "list": []
     },
     "time": {
-      "from": "now-6h",
-      "to": "now"
+        "from": "now-6h",
+        "to": "now"
     },
     "timepicker": {},
     "timezone": "",
@@ -114,4 +112,4 @@
     "uid": "a22dfa2a-d04c-4cff-baf4-098b9a302009",
     "version": 2,
     "weekStart": ""
-  }
+}
