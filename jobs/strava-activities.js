@@ -1,8 +1,10 @@
 import moment from 'moment';
 import fetch from 'node-fetch';
+import lodash from 'lodash';
 import { BASE_STRAVA_API_URL, refreshAccessToken } from './utils/strava.js';
-import { addPoints } from './utils/pg-connection.js';
+import { addPoints, getAthletesIds } from './utils/pg-connection.js';
 import { bree } from '../index.js';
+const { findIndex } = lodash;
 
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
@@ -25,6 +27,8 @@ const METRICS = [
     const start = moment().subtract(20, 'days');
     const end = moment().format(DATE_FORMAT);
 
+    const athleteIds = getAthletesIds();
+
     console.log(`Starting import from ${start.format(DATE_FORMAT)} to ${end}`);
 
     const token_object = await refreshAccessToken(bree.config.shared.stravaRefreshToken);
@@ -33,26 +37,30 @@ const METRICS = [
         bree.config.shared.stravaRefreshToken = token_object.refresh_token;
     }
 
-
-    const response = await fetch(
-        `${BASE_STRAVA_API_URL}/clubs/thorignettrunningclub/activities`,
-        {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token_object.access_token}`,
-            },
+    const response = await fetch(`${BASE_STRAVA_API_URL}/clubs/thorignettrunningclub/activities?per_page=100`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token_object.access_token}`,
         },
-    );
+    });
 
     const activities = await response.json();
-    const points = activities
+    const index = findIndex(activities, { distance: '10054.1' });
+    const filteredActivities = index !== -1 ? activities.slice(0, firstActivityIndex) : activities;
+    const points = filteredActivities
         .map((activity) => {
-            const date = moment.utc(activity.start_date_local).format('YYYY-MM-DD HH:00:00');
-            return METRICS.map((metric) => ({
-                id: metric.id,
-                value: metric.valueFn(activity).toFixed(2),
-                date,
-            }));
+            const { firstName, lastName } = activity.athlete;
+            const fullName = `${firstName} ${lastName}`;
+            const date = moment().format('YYYY-MM-DD HH:00:00');
+
+            return athleteIds.includes(fullName)
+                ? METRICS.map((metric) => ({
+                      athleteId: `${firstName} ${lastName}`,
+                      id: metric.id,
+                      value: metric.valueFn(activity).toFixed(2),
+                      date,
+                  }))
+                : [];
         })
         .flat();
 
@@ -61,6 +69,5 @@ const METRICS = [
     }
 
     console.log(`End of the import`);
-
-    return;
+    bree.stop();
 })();
