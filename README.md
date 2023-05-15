@@ -31,31 +31,38 @@ git clone https://github.com/TheoLaperrouse/StravaChallenge.git
 -   `POSTGRES_USER` : le nom d'utilisateur de la base de données Postgresql.
 -   `POSTGRES_PASSWORD` : le mot de passe de la base de données Postgresql.
 -   `POSTGRES_DB` : le nom de la base de données Postgresql.
--   `GF_SECURITY_ADMIN_PASSWORD` : le mot de passe de l'utilisateur admin pour Grafana.
+-   `PGADMIN_DEFAULT_EMAIL` : l'email pour accéder à pgAdmin
+-   `PGADMIN_DEFAULT_PASSWORD` : le mot de passe pour accéder à pgAdmin
 
-3. Exécuter la commande suivante pour donner les permissions à l'utilisateur `104:104` sur le dossier `./gfdata` :
+1. Exécuter la commande suivante pour donner les permissions à l'utilisateur `104:104` sur le dossier `./gfdata` :
 
 ```sh
 chown 104:104 ./gfdata
 ```
 
-4. Exécuter la commande suivante pour démarrer l'application :
+2. Exécuter la commande suivante pour démarrer l'application :
 
 ```sh
 docker-compose up
 ```
 
-5. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe renseigné dans la variable `GF_SECURITY_ADMIN_PASSWORD` du fichier `.env`.
+1. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`
 
 ## Fonctionnement
 
-L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes` et `results`.
+L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes`, `results` et `metrics`.
 
 La table `athletes` stocke les informations de chaque athlète :
 
 -   `id` : identifiant unique de l'athlète.
 -   `first_name` : prénom de l'athlète.
 -   `last_name` : nom de famille de l'athlète.
+-   
+La table `metrics` stocke les informations de chaque metric :
+
+-   `id` : identifiant unique du metric.
+-   `name` : nom du metric.
+-   `unit` : l'unité du metric.
 
 La table `results` stocke les performances de chaque athlète :
 

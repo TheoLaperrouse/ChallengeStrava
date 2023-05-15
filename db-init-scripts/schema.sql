@@ -13,7 +13,7 @@ CREATE TABLE metrics (
 CREATE TABLE results (
   id SERIAL PRIMARY KEY,
   athlete_id INTEGER REFERENCES athletes(id),
-  metric_id INTEGER REFERENCES metrics(id),
+  metric_id VARCHAR(255) REFERENCES metrics(id),
   value VARCHAR(255) NOT NULL,
   date TIMESTAMP NOT NULL,
   CONSTRAINT results_unique_key UNIQUE (athlete_id, metric_id, date)
