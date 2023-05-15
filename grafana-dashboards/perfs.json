@@ -25,7 +25,7 @@
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
             },
             "fieldConfig": {
                 "defaults": {
@@ -63,7 +63,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 91
+                                "value": 115
                             }
                         ]
                     }
@@ -87,12 +87,12 @@
                 "showHeader": true,
                 "sortBy": []
             },
-            "pluginVersion": "9.5.1",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
                     "datasource": {
                         "type": "postgres",
-                        "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
                     },
                     "editorMode": "builder",
                     "format": "table",
@@ -151,7 +151,7 @@
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
             },
             "fieldConfig": {
                 "defaults": {
@@ -199,17 +199,17 @@
                 },
                 "showHeader": true
             },
-            "pluginVersion": "9.5.1",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
                     "datasource": {
                         "type": "postgres",
-                        "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
                     },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
-                    "rawSql": "SELECT r.date as \"Heure de la course\", r.value as \"Distance\", a.first_name as \"Nom Athlète\"\nFROM results r\nJOIN athletes a ON r.athlete_id = a.id\nJOIN metrics m ON r.metric_id = m.id\nWHERE m.name = 'Distance'\nORDER BY r.date DESC\nLIMIT 10;",
+                    "rawSql": "SELECT r.date AS \"Heure de la course\", r.value AS \"Distance\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\"\nFROM results r\nJOIN athletes a ON r.athlete_id = a.id\nJOIN metrics m ON r.metric_id = m.id\nWHERE m.name = 'Distance'\nORDER BY r.date DESC\nLIMIT 10;",
                     "refId": "A",
                     "sql": {
                         "columns": [
@@ -237,7 +237,7 @@
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
             },
             "fieldConfig": {
                 "defaults": {
@@ -299,12 +299,12 @@
                 "showHeader": true,
                 "sortBy": []
             },
-            "pluginVersion": "9.5.1",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
                     "datasource": {
                         "type": "postgres",
-                        "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
                     },
                     "editorMode": "builder",
                     "format": "table",
@@ -363,7 +363,7 @@
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
             },
             "fieldConfig": {
                 "defaults": {
@@ -440,7 +440,7 @@
                 {
                     "datasource": {
                         "type": "postgres",
-                        "uid": "a908e083-d226-448f-9b23-9d0aac5708cb"
+                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
                     },
                     "editorMode": "code",
                     "format": "table",
@@ -470,7 +470,7 @@
             "type": "timeseries"
         }
     ],
-    "refresh": false,
+    "refresh": "",
     "schemaVersion": 38,
     "style": "dark",
     "tags": [],
@@ -483,8 +483,8 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "General Dashboard",
+    "title": "Performances Challenge",
     "uid": "a22dfa2a-d04c-4cff-baf4-098b9a302009",
-    "version": 4,
+    "version": 3,
     "weekStart": ""
 }

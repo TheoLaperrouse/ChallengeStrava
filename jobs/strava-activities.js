@@ -24,13 +24,7 @@ const METRICS = [
 ];
 
 (async () => {
-    const start = moment().subtract(20, 'days');
-    const end = moment().format(DATE_FORMAT);
-
     const athleteIds = await getAthletesIds();
-
-    console.log(`Starting import from ${start.format(DATE_FORMAT)} to ${end}`);
-
     const token_object = await refreshAccessToken(bree.config.shared.stravaRefreshToken);
 
     if (token_object.refresh_token !== bree.config.shared.stravaRefreshToken) {
@@ -45,17 +39,17 @@ const METRICS = [
     });
 
     const activities = await response.json();
-    const index = findIndex(activities, { distance: '10054.1' });
-    const filteredActivities = index !== -1 ? activities.slice(0, firstActivityIndex) : activities;
+    const index = findIndex(activities, { distance: 10054.1 });
+    const filteredActivities = index !== -1 ? activities.slice(0, index) : activities;
     const points = filteredActivities
         .map((activity) => {
-            const { firstName, lastName } = activity.athlete;
-            const fullName = `${firstName} ${lastName}`;
+            const { firstname, lastname } = activity.athlete;
+            const fullName = `${firstname} ${lastname}`;
             const date = moment().format('YYYY-MM-DD HH:00:00');
 
             return athleteIds.includes(fullName)
                 ? METRICS.map((metric) => ({
-                      athleteId: `${firstName} ${lastName}`,
+                      athleteId: fullName,
                       id: metric.id,
                       value: metric.valueFn(activity).toFixed(2),
                       date,
@@ -63,11 +57,8 @@ const METRICS = [
                 : [];
         })
         .flat();
-
     if (points.length > 0) {
         await addPoints(points);
     }
-
-    console.log(`End of the import`);
     bree.stop();
 })();
