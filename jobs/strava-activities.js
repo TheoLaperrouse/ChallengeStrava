@@ -27,7 +27,7 @@ const METRICS = [
     const start = moment().subtract(20, 'days');
     const end = moment().format(DATE_FORMAT);
 
-    const athleteIds = getAthletesIds();
+    const athleteIds = await getAthletesIds();
 
     console.log(`Starting import from ${start.format(DATE_FORMAT)} to ${end}`);
 

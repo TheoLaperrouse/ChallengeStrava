@@ -1,5 +1,5 @@
 CREATE TABLE athletes (
-  id SERIAL PRIMARY KEY,
+  id VARCHAR(255) PRIMARY KEY,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL
 );
@@ -12,7 +12,7 @@ CREATE TABLE metrics (
 
 CREATE TABLE results (
   id SERIAL PRIMARY KEY,
-  athlete_id INTEGER REFERENCES athletes(id),
+  athlete_id VARCHAR(255) REFERENCES athletes(id),
   metric_id VARCHAR(255) REFERENCES metrics(id),
   value VARCHAR(255) NOT NULL,
   date TIMESTAMP NOT NULL,
@@ -26,4 +26,4 @@ VALUES ('distance_run', 'Distance', 'km'),
 
 INSERT INTO athletes (id, first_name, last_name)
 VALUES
-(70861920, 'Théo', 'Laperrouse')
+('Theo L.', 'Théo', 'Laperrouse');

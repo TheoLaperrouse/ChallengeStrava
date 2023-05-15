@@ -46,7 +46,11 @@ chown 104:104 ./gfdata
 docker-compose up
 ```
 
-1. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`
+3. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`, et ajouter la base de données en tant que dataSource : 
+- Host : `postgres:5432`
+- user : `POSTGRES_USER`
+- password : `POSTGRES_PASSWORD`
+- db : `POSTGRES_DB`
 
 ## Fonctionnement
 
