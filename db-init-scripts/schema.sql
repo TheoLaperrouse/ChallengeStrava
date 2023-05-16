@@ -4,25 +4,15 @@ CREATE TABLE athletes (
   last_name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE metrics (
-  id VARCHAR(255) NOT NULL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  unit VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE results (
+CREATE TABLE activities (
   id SERIAL PRIMARY KEY,
   athlete_id VARCHAR(255) REFERENCES athletes(id),
-  metric_id VARCHAR(255) REFERENCES metrics(id),
-  value VARCHAR(255) NOT NULL,
+  distance_run VARCHAR(255) NOT NULL,
+  time_run VARCHAR(255) NOT NULL,
+  speed_run VARCHAR(255) NOT NULL,
   date TIMESTAMP NOT NULL,
-  CONSTRAINT results_unique_key UNIQUE (athlete_id, metric_id, value)
+  CONSTRAINT results_unique_key UNIQUE (athlete_id, distance_run, time_run)
   );
-
-INSERT INTO metrics (id, name, unit)
-VALUES ('distance_run', 'Distance', 'km'),
-       ('time_run', 'Temps', 'min'),
-       ('speed_run', 'Vitesse', 'km/h');
 
 INSERT INTO athletes (id, first_name, last_name)
 VALUES

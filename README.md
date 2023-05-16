@@ -46,30 +46,28 @@ chown 104:104 ./gfdata
 docker-compose up
 ```
 
-3. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`, et ajouter la base de données en tant que dataSource : 
-- Host : `postgres:5432`
-- user : `POSTGRES_USER`
-- password : `POSTGRES_PASSWORD`
-- db : `POSTGRES_DB`
+3. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`, et ajouter la base de données en tant que dataSource :
+
+-   Host : `postgres:5432`
+-   user : `POSTGRES_USER`
+-   password : `POSTGRES_PASSWORD`
+-   db : `POSTGRES_DB`
 
 ## Fonctionnement
 
-L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes`, `results` et `metrics`.
+L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes`, `activities`.
 
 La table `athletes` stocke les informations de chaque athlète :
 
 -   `id` : identifiant unique de l'athlète.
 -   `first_name` : prénom de l'athlète.
 -   `last_name` : nom de famille de l'athlète.
--   
-La table `metrics` stocke les informations de chaque metric :
 
--   `id` : identifiant unique du metric.
--   `name` : nom du metric.
--   `unit` : l'unité du metric.
+La table `activities` stocke les performances de chaque athlète :
 
-La table `results` stocke les performances de chaque athlète :
-
--   `id` : identifiant unique de la performance.
--   `athlete_id` : identifiant de l'athlète.
--   `metric_id` : identifiant de la métrique.
+-   `id` : identifiant unique de la performance
+-   `athlete_id` : identifiant de l'athlète
+-   `distance_run` : distance de la course
+-   `time_run` : temps de la course
+-   `speed_run` : vitesse de la course
+-   `date` : date de la course

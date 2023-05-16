@@ -9,15 +9,21 @@ export const pool = new pg.Pool({
 });
 
 export async function addPoints(data) {
-    const query = `INSERT INTO results (athlete_id, metric_id, value, date) VALUES ($1, $2, $3, $4) ON CONFLICT (athlete_id, metric_id, value) DO NOTHING;`;
+    const query = `INSERT INTO activities (athlete_id, distance_run, time_run, speed_run, date) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (athlete_id, distance_run, time_run) DO NOTHING;`;
 
     try {
         for (const result of data) {
-            const values = [result.athleteId, result.id, result.value, result.date];
+            const values = [
+                result.athleteId,
+                result.distance_run.toFixed(2),
+                result.time_run.toFixed(2),
+                result.speed_run.toFixed(2),
+                result.date,
+            ];
             await pool.query(query, values);
         }
     } catch (err) {
-        console.error('Error inserting results', err);
+        console.error('Error inserting activities', err);
     }
 }
 
