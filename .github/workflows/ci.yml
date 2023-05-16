@@ -25,4 +25,4 @@ jobs:
               run: |
                   echo "${SSH_KEY}" > key.pem
                   chmod 400 key.pem
-                  ssh -o "StrictHostKeyChecking no" -i key.pem ubuntu@ec2-54-216-47-124.eu-west-1.compute.amazonaws.com "cd ChallengeStrava && sudo docker compose down && git pull && sudo docker compose up --build -d"
+                  ssh -o "StrictHostKeyChecking no" -i key.pem ubuntu@ec2-54-216-47-124.eu-west-1.compute.amazonaws.com "cd ChallengeStrava && sudo docker compose down && git pull -f && sudo docker compose up --build -d"
