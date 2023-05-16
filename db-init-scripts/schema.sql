@@ -16,8 +16,8 @@ CREATE TABLE results (
   metric_id VARCHAR(255) REFERENCES metrics(id),
   value VARCHAR(255) NOT NULL,
   date TIMESTAMP NOT NULL,
-  CONSTRAINT results_unique_key UNIQUE (athlete_id, metric_id, date)
-);
+  CONSTRAINT results_unique_key UNIQUE (athlete_id, metric_id, value)
+  );
 
 INSERT INTO metrics (id, name, unit)
 VALUES ('distance_run', 'Distance', 'km'),

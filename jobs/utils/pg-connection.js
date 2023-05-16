@@ -9,7 +9,7 @@ export const pool = new pg.Pool({
 });
 
 export async function addPoints(data) {
-    const query = `INSERT INTO results (athlete_id, metric_id, value, date) VALUES ($1, $2, $3, $4) ON CONFLICT (athlete_id, metric_id, date) DO NOTHING;`;
+    const query = `INSERT INTO results (athlete_id, metric_id, value, date) VALUES ($1, $2, $3, $4) ON CONFLICT (athlete_id, metric_id, value) DO NOTHING;`;
 
     try {
         for (const result of data) {
