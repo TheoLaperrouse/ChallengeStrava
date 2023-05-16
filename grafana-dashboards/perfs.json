@@ -18,14 +18,304 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 1,
+    "id": 2,
     "links": [],
     "liveNow": false,
     "panels": [
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
+                "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Plus longue distance"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 161
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Nom Athlète"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 128
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 7,
+                "x": 0,
+                "y": 0
+            },
+            "id": 5,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": ["sum"],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "Temps couru le plus long"
+                    }
+                ]
+            },
+            "pluginVersion": "9.5.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "postgres",
+                        "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
+                    },
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance_run::numeric) AS \"Plus longue distance\",  MAX(a.time_run::numeric) AS \"Temps couru le plus long\"\nFROM activities a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Plus longue distance\" DESC;",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "name": "MAX",
+                                "parameters": [
+                                    {
+                                        "name": "distance_run",
+                                        "type": "functionParameter"
+                                    }
+                                ],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    },
+                    "table": "activities"
+                }
+            ],
+            "title": "Panel Title",
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "postgres",
+                "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 12,
+                "w": 12,
+                "x": 7,
+                "y": 0
+            },
+            "id": 3,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": ["sum"],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "9.5.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "postgres",
+                        "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
+                    },
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "SELECT r.date AS \"Heure de la course\", r.distance_run AS \"Distance (km)\",r.time_run AS \"Temps (min)\",r.speed_run AS \"Vitesse\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\"\nFROM activities r\nJOIN athletes a ON r.athlete_id = a.id\nORDER BY r.date DESC\nLIMIT 10;",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "parameters": [],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    },
+                    "table": "results"
+                }
+            ],
+            "title": "Dernière Courses",
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "postgres",
+                "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 12,
+                "w": 5,
+                "x": 19,
+                "y": 0
+            },
+            "id": 6,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "auto"
+            },
+            "pluginVersion": "9.5.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "postgres",
+                        "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
+                    },
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "SELECT SUM(CAST(distance_run AS numeric)) AS total_distance\nFROM activities;",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "parameters": [],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    },
+                    "table": "activities"
+                }
+            ],
+            "title": "Kilomètres totaux",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "postgres",
+                "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
             },
             "fieldConfig": {
                 "defaults": {
@@ -71,9 +361,9 @@
             },
             "gridPos": {
                 "h": 6,
-                "w": 6,
+                "w": 7,
                 "x": 0,
-                "y": 0
+                "y": 6
             },
             "id": 1,
             "options": {
@@ -92,7 +382,7 @@
                 {
                     "datasource": {
                         "type": "postgres",
-                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
+                        "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
                     },
                     "editorMode": "builder",
                     "format": "table",
@@ -144,226 +434,14 @@
                     "table": "athletes"
                 }
             ],
-            "title": "Panel Title",
+            "title": "Athlètes",
             "transformations": [],
             "type": "table"
         },
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "inspect": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 12,
-                "w": 18,
-                "x": 6,
-                "y": 0
-            },
-            "id": 3,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": ["sum"],
-                    "show": false
-                },
-                "showHeader": true
-            },
-            "pluginVersion": "9.5.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "postgres",
-                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
-                    },
-                    "editorMode": "code",
-                    "format": "table",
-                    "rawQuery": true,
-                    "rawSql": "SELECT r.date AS \"Heure de la course\", r.value AS \"Distance\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\"\nFROM results r\nJOIN athletes a ON r.athlete_id = a.id\nJOIN metrics m ON r.metric_id = m.id\nWHERE m.name = 'Distance'\nORDER BY r.date DESC\nLIMIT 10;",
-                    "refId": "A",
-                    "sql": {
-                        "columns": [
-                            {
-                                "parameters": [],
-                                "type": "function"
-                            }
-                        ],
-                        "groupBy": [
-                            {
-                                "property": {
-                                    "type": "string"
-                                },
-                                "type": "groupBy"
-                            }
-                        ],
-                        "limit": 50
-                    },
-                    "table": "results"
-                }
-            ],
-            "title": "Dernière Courses",
-            "type": "table"
-        },
-        {
-            "datasource": {
-                "type": "postgres",
-                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "inspect": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "Id Strava"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 91
-                            }
-                        ]
-                    }
-                ]
-            },
-            "gridPos": {
-                "h": 6,
-                "w": 6,
-                "x": 0,
-                "y": 6
-            },
-            "id": 2,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": ["sum"],
-                    "show": false
-                },
-                "showHeader": true,
-                "sortBy": []
-            },
-            "pluginVersion": "9.5.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "postgres",
-                        "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
-                    },
-                    "editorMode": "builder",
-                    "format": "table",
-                    "rawSql": "SELECT id AS \"Id Metric\", name AS \"Nom\", unit AS \"Unité\" FROM metrics LIMIT 50 ",
-                    "refId": "A",
-                    "sql": {
-                        "columns": [
-                            {
-                                "alias": "\"Id Metric\"",
-                                "parameters": [
-                                    {
-                                        "name": "id",
-                                        "type": "functionParameter"
-                                    }
-                                ],
-                                "type": "function"
-                            },
-                            {
-                                "alias": "\"Nom\"",
-                                "parameters": [
-                                    {
-                                        "name": "name",
-                                        "type": "functionParameter"
-                                    }
-                                ],
-                                "type": "function"
-                            },
-                            {
-                                "alias": "\"Unité\"",
-                                "parameters": [
-                                    {
-                                        "name": "unit",
-                                        "type": "functionParameter"
-                                    }
-                                ],
-                                "type": "function"
-                            }
-                        ],
-                        "groupBy": [
-                            {
-                                "property": {
-                                    "type": "string"
-                                },
-                                "type": "groupBy"
-                            }
-                        ],
-                        "limit": 50
-                    },
-                    "table": "metrics"
-                }
-            ],
-            "title": "Panel Title",
-            "transformations": [],
-            "type": "table"
-        },
-        {
-            "datasource": {
-                "type": "postgres",
-                "uid": "fb04f732-f68f-447d-82e9-9f2b930d4fc5"
+                "uid": "d6107aa9-b3b9-4a84-8b79-757991d9552b"
             },
             "fieldConfig": {
                 "defaults": {
@@ -445,7 +523,7 @@
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
-                    "rawSql": "SELECT \n    athletes.first_name AS athlete,\n    results.value AS distance,\n    results.date AS time,\n    SUM(results.value::float) OVER (\n        PARTITION BY athletes.id \n        ORDER BY results.date\n    ) AS cumulative_distance\nFROM results \nINNER JOIN athletes ON results.athlete_id = athletes.id \nINNER JOIN metrics ON results.metric_id = metrics.id \nWHERE metrics.id = 'distance_run' \nORDER BY time;",
+                    "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Nicolas B.') OVER (ORDER BY date) AS \"Nicolas\",\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Kévin L.') OVER (ORDER BY date) AS \"Kévin\",\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
                     "refId": "A",
                     "sql": {
                         "columns": [
@@ -466,11 +544,11 @@
                     }
                 }
             ],
-            "title": "Distance Cumulative",
+            "title": "Distance Cumulative par athlète",
             "type": "timeseries"
         }
     ],
-    "refresh": "",
+    "refresh": false,
     "schemaVersion": 38,
     "style": "dark",
     "tags": [],
@@ -478,13 +556,13 @@
         "list": []
     },
     "time": {
-        "from": "now/y",
-        "to": "now/y"
+        "from": "2023-05-06T22:00:00.000Z",
+        "to": "2023-08-31T21:59:59.000Z"
     },
     "timepicker": {},
     "timezone": "",
     "title": "Performances Challenge",
     "uid": "a22dfa2a-d04c-4cff-baf4-098b9a302009",
-    "version": 3,
+    "version": 4,
     "weekStart": ""
 }

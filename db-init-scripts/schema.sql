@@ -7,9 +7,9 @@ CREATE TABLE athletes (
 CREATE TABLE activities (
   id SERIAL PRIMARY KEY,
   athlete_id VARCHAR(255) REFERENCES athletes(id),
-  distance_run VARCHAR(255) NOT NULL,
-  time_run VARCHAR(255) NOT NULL,
-  speed_run VARCHAR(255) NOT NULL,
+  distance_run NUMERIC NOT NULL,
+  time_run NUMERIC NOT NULL,
+  speed_run NUMERIC NOT NULL,
   date TIMESTAMP NOT NULL,
   CONSTRAINT results_unique_key UNIQUE (athlete_id, distance_run, time_run)
   );
