@@ -13,13 +13,7 @@ export async function addPoints(data) {
 
     try {
         for (const result of data) {
-            const values = [
-                result.athleteId,
-                result.distance_run.toFixed(2),
-                result.time_run.toFixed(2),
-                result.speed_run.toFixed(2),
-                result.date,
-            ];
+            const values = [result.athleteId, result.distance_run, result.time_run, result.speed_run, result.date];
             await pool.query(query, values);
         }
     } catch (err) {

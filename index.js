@@ -5,7 +5,7 @@ export const bree = new Bree({
     jobs: [
         {
             name: 'strava-activities',
-            interval: 'every day',
+            interval: 'every 6 hours',
         },
     ],
     shared: {

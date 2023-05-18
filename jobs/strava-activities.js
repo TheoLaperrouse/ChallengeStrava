@@ -32,10 +32,10 @@ const { findIndex } = lodash;
             return athleteIds.includes(fullName)
                 ? {
                       athleteId: fullName,
-                      distance_run: activity.distance / 1000,
-                      time_run: activity.moving_time / 60,
-                      speed_run: (activity.distance / activity.moving_time) * 3.6,
-                      date: moment().format('YYYY-MM-DD 00:00:00'),
+                      distance_run: (activity.distance / 1000).toFixed(2),
+                      time_run: (activity.moving_time / 60).toFixed(2),
+                      speed_run: ((activity.distance / activity.moving_time) * 3.6).toFixed(2),
+                      date: moment().format('YYYY-MM-DD HH:00:00'),
                   }
                 : [];
         })
