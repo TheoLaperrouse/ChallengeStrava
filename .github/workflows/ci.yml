@@ -1,29 +1,29 @@
-name: Deploy
+# name: Deploy
 
-on:
-    push:
-        branches: [master]
+# on:
+#     push:
+#         branches: [master]
 
-jobs:
-    deploy:
-        if: github.event_name == 'workflow_dispatch'
-        runs-on: ubuntu-latest
-        permissions:
-            id-token: write
-            contents: read
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
-            - name: Configure AWS credentials
-              uses: aws-actions/configure-aws-credentials@v1
-              with:
-                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  aws-region: eu-west-1
-            - name: Redeploy Challenge Strava
-              env:
-                  SSH_KEY: ${{ secrets.SSH_KEY }}
-              run: |
-                  echo "${SSH_KEY}" > key.pem
-                  chmod 400 key.pem
-                  ssh -o "StrictHostKeyChecking no" -i key.pem ubuntu@ec2-54-216-47-124.eu-west-1.compute.amazonaws.com "cd ChallengeStrava && sudo docker compose down && git pull -f && sudo docker compose up --build -d"
+# jobs:
+#     deploy:
+#         if: github.event_name == 'workflow_dispatch'
+#         runs-on: ubuntu-latest
+#         permissions:
+#             id-token: write
+#             contents: read
+#         steps:
+#             - name: Checkout code
+#               uses: actions/checkout@v2
+#             - name: Configure AWS credentials
+#               uses: aws-actions/configure-aws-credentials@v1
+#               with:
+#                   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#                   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#                   aws-region: eu-west-1
+#             - name: Redeploy Challenge Strava
+#               env:
+#                   SSH_KEY: ${{ secrets.SSH_KEY }}
+#               run: |
+#                   echo "${SSH_KEY}" > key.pem
+#                   chmod 400 key.pem
+#                   ssh -o "StrictHostKeyChecking no" -i key.pem ubuntu@ec2-54-216-47-124.eu-west-1.compute.amazonaws.com "cd ChallengeStrava && sudo docker compose down && git pull -f && sudo docker compose up --build -d"

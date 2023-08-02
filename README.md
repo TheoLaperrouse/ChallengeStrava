@@ -60,13 +60,11 @@ docker-compose up
 L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes`, `activities`.
 
 La table `athletes` stocke les informations de chaque athlète :
-
 -   `id` : identifiant unique de l'athlète.
 -   `first_name` : prénom de l'athlète.
 -   `last_name` : nom de famille de l'athlète.
 
 La table `activities` stocke les performances de chaque athlète :
-
 -   `id` : identifiant unique de la performance
 -   `athlete_id` : identifiant de l'athlète
 -   `distance_run` : distance de la course

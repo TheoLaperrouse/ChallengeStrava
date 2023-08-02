@@ -29,7 +29,7 @@ const { findIndex } = lodash;
             const { firstname, lastname } = activity.athlete;
             const fullName = `${firstname} ${lastname}`;
 
-            return athleteIds.includes(fullName)
+            return athleteIds.includes(fullName) && ['Run', 'TrailRun'].includes(activity['sport_type'])
                 ? {
                       athleteId: fullName,
                       distance_run: (activity.distance / 1000).toFixed(2),
