@@ -10,9 +10,10 @@ CREATE TABLE activities (
   distance_run NUMERIC NOT NULL,
   time_run NUMERIC NOT NULL,
   speed_run NUMERIC NOT NULL,
+  elevation_gain NUMERIC NOT NULL,
   date TIMESTAMP NOT NULL,
   CONSTRAINT results_unique_key UNIQUE (athlete_id, distance_run, time_run)
-  );
+);
 
 INSERT INTO athletes (id, first_name, last_name)
 VALUES

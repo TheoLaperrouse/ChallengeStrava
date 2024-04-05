@@ -22,8 +22,9 @@ const { findIndex } = lodash;
     });
 
     const activities = await response.json();
-    const index = findIndex(activities, { distance: 10106.3 });
+    const index = findIndex(activities, { distance: 15029.2 });
     const filteredActivities = index !== -1 ? activities.slice(0, index - 1) : activities;
+    console.log(filteredActivities);
     const points = filteredActivities
         .map((activity) => {
             const { firstname, lastname } = activity.athlete;
@@ -35,6 +36,7 @@ const { findIndex } = lodash;
                       distance_run: (activity.distance / 1000).toFixed(2),
                       time_run: (activity.moving_time / 60).toFixed(2),
                       speed_run: ((activity.distance / activity.moving_time) * 3.6).toFixed(2),
+                      elevation_gain: activity.total_elevation_gain,
                       date: moment().format('YYYY-MM-DD HH:00:00'),
                   }
                 : [];
