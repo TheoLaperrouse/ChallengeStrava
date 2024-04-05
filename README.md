@@ -43,7 +43,7 @@ chown 104:104 ./gfdata
 4. Exécuter la commande suivante pour démarrer l'application :
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 5. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`, et ajouter la base de données en tant que dataSource :

@@ -22,7 +22,7 @@ const { findIndex } = lodash;
     });
 
     const activities = await response.json();
-    const index = findIndex(activities, { distance: 10054.1 });
+    const index = findIndex(activities, { distance: 10106.3 });
     const filteredActivities = index !== -1 ? activities.slice(0, index - 1) : activities;
     const points = filteredActivities
         .map((activity) => {

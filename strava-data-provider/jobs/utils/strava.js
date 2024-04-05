@@ -1,4 +1,7 @@
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const BASE_STRAVA_API_URL = 'https://www.strava.com/api/v3';
 

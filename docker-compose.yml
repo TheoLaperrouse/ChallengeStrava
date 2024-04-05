@@ -1,13 +1,17 @@
-version: '3'
-
 services:
     grafana:
-        image: grafana/grafana:latest
+        build: grafana
         user: '104'
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+            GF_PATHS_PROVISIONING: '/provisioning'
+            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: 'gf_dashboards/home.json'
         ports:
             - '3000:3000'
         volumes:
-            - ./gfdata:/var/lib/grafana
+            - ./grafana/provisioning:/etc/grafana/provisioning
         depends_on:
             - postgres
 
@@ -24,27 +28,15 @@ services:
             - ./db-init-scripts:/docker-entrypoint-initdb.d
 
     strava-data-provider:
-        build: .
+        build: strava-data-provider
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_HOST: postgres
             STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
             STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
-        depends_on:
-            - postgres
-
-    pgadmin:
-        image: dpage/pgadmin4
-        restart: always
-        environment:
-            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-            PGADMIN_LISTEN_ADDRESS: '0.0.0.0'
-        ports:
-            - '5050:80'
-        volumes:
-            - pgadmin-data:/var/lib/pgadmin
+            STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
         depends_on:
             - postgres
 
