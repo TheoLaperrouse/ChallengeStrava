@@ -34,11 +34,7 @@ git clone https://github.com/TheoLaperrouse/StravaChallenge.git
 -   `PGADMIN_DEFAULT_EMAIL` : l'email pour accéder à pgAdmin
 -   `PGADMIN_DEFAULT_PASSWORD` : le mot de passe pour accéder à pgAdmin
 
-3. Exécuter la commande suivante pour donner les permissions à l'utilisateur `104:104` sur le dossier `./gfdata` :
-
-```sh
-chown 104:104 ./gfdata
-```
+3. Si vous voulez utilisez le postgres du docker compose, modifier le datasource et pg-connection.js, enlever le SSL require.
 
 4. Exécuter la commande suivante pour démarrer l'application :
 
@@ -46,14 +42,7 @@ chown 104:104 ./gfdata
 docker compose up
 ```
 
-5. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000` avec les identifiants `admin` et le mot de passe `admin`, et ajouter la base de données en tant que dataSource :
-
--   Host : `postgres:5432`
--   user : `POSTGRES_USER`
--   password : `POSTGRES_PASSWORD`
--   db : `POSTGRES_DB`
-
-( La configuration nginx est dans `nginx.conf`, Grafana sur l'adresse de base et pgAdmin sur /pgAdmin)
+5. Se connecter au tableau de bord Grafana à l'adresse `http://localhost:3000`
 
 ## Fonctionnement
 
@@ -70,5 +59,6 @@ La table `activities` stocke les performances de chaque athlète :
 -   `distance_run` : distance de la course
 -   `time_run` : temps de la course
 -   `speed_run` : vitesse de la course
+-   `elevation_gain` : dénivelé positif
 -   `date` : date de la course
 

@@ -1,31 +1,20 @@
 services:
     grafana:
         build: grafana
-        user: '104'
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_DB: ${POSTGRES_DB}
-            GF_PATHS_PROVISIONING: '/provisioning'
-            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: 'gf_dashboards/home.json'
+            POSTGRES_HOST: ${POSTGRES_HOST}
+            GF_PATHS_PROVISIONING: '/etc/grafana/provisioning'
+            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: '/etc/grafana/provisioning/dashboards/perfs.json'
         ports:
             - '3000:3000'
         volumes:
             - ./grafana/provisioning:/etc/grafana/provisioning
-        depends_on:
-            - postgres
-
-    postgres:
-        image: postgres:latest
-        environment:
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
-        ports:
-            - '5432:5432'
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
-            - ./db-init-scripts:/docker-entrypoint-initdb.d
+            - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini
+        # depends_on:
+        #     - postgres
 
     strava-data-provider:
         build: strava-data-provider
@@ -33,13 +22,25 @@ services:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_DB: ${POSTGRES_DB}
-            POSTGRES_HOST: postgres
+            POSTGRES_HOST: ${POSTGRES_HOST}
             STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
             STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
             STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
-        depends_on:
-            - postgres
+        # depends_on:
+        #     - postgres
 
-volumes:
-    postgres_data:
-    pgadmin-data:
+    # Don't forget to desactivate ssl on datasource if you enable localdb
+    # postgres:
+    #     image: postgres:latest
+    #     environment:
+    #         POSTGRES_USER: ${POSTGRES_USER}
+    #         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    #         POSTGRES_DB: ${POSTGRES_DB}
+    #     ports:
+    #         - '5432:5432'
+    #     volumes:
+    #         - postgres_data:/var/lib/postgresql/data
+    #         - ./db-init-scripts:/docker-entrypoint-initdb.d
+    
+# volumes:
+# postgres_data:
