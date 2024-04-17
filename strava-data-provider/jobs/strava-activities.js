@@ -22,8 +22,8 @@ const { findIndex } = lodash;
     });
 
     const activities = await response.json();
-    const index = findIndex(activities, { distance: 15029.2 });
-    const filteredActivities = index !== -1 ? activities.slice(0, index - 1) : activities;
+    const index = findIndex(activities, { distance: 5010.4 });
+    const filteredActivities = index !== -1 ? activities.slice(0, index) : activities;
     console.log(filteredActivities);
     const points = filteredActivities
         .map((activity) => {

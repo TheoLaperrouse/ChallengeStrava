@@ -18,14 +18,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "name": "PostgreSQL"
       },
       "fieldConfig": {
         "defaults": {
@@ -52,7 +52,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -79,7 +80,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 207
+                "value": 171
               }
             ]
           },
@@ -95,7 +96,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 193
+                "value": 99
               }
             ]
           },
@@ -114,12 +115,16 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Dénivelé positif max"
+              "options": "D+ max"
             },
             "properties": [
               {
                 "id": "unit",
                 "value": "lengthm"
+              },
+              {
+                "id": "custom.width",
+                "value": 67
               }
             ]
           }
@@ -145,7 +150,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -155,7 +160,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance_run::numeric) AS \"Distance Max\",  MAX(a.time_run::numeric) AS \"Temps Max\",  MAX(a.elevation_gain::numeric) AS \"Dénivelé positif max\", AVG(a.speed_run::numeric) AS \"Vitesse Moyenne\"\nFROM activities a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Distance Max\" DESC;",
+          "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance_run::numeric) AS \"Distance Max\",  MAX(a.time_run::numeric) AS \"Temps Max\",  MAX(a.elevation_gain::numeric) AS \"D+ max\", AVG(a.speed_run::numeric) AS \"Vitesse Moyenne\"\nFROM activities a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Distance Max\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -187,8 +192,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "name": "PostgreSQL"
       },
       "fieldConfig": {
         "defaults": {
@@ -215,7 +220,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -239,6 +245,10 @@
               {
                 "id": "unit",
                 "value": "lengthkm"
+              },
+              {
+                "id": "custom.width",
+                "value": 77
               }
             ]
           },
@@ -251,6 +261,10 @@
               {
                 "id": "unit",
                 "value": "m"
+              },
+              {
+                "id": "custom.width",
+                "value": 111
               }
             ]
           },
@@ -263,6 +277,10 @@
               {
                 "id": "unit",
                 "value": "dateTimeAsIso"
+              },
+              {
+                "id": "custom.width",
+                "value": 166
               }
             ]
           },
@@ -297,9 +315,10 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": []
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -309,7 +328,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT r.date AS \"Heure de la course\", r.distance_run AS \"Distance\",r.time_run AS \"Temps\",r.speed_run AS \"Vitesse\",r.elevation_gain AS \"Dénivelé positif\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\"\nFROM activities r\nJOIN athletes a ON r.athlete_id = a.id\nORDER BY r.date DESC\nLIMIT 10;",
+          "rawSql": "SELECT r.date AS \"Heure de la course\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", r.distance_run AS \"Distance\",r.time_run AS \"Temps\",r.speed_run AS \"Vitesse\",r.elevation_gain AS \"Dénivelé positif\"\nFROM activities r\nJOIN athletes a ON r.athlete_id = a.id\nORDER BY r.date DESC\nLIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -357,7 +376,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -397,7 +417,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -459,7 +479,8 @@
                 "value": 85
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -499,7 +520,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -536,8 +557,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "name": "PostgreSQL"
       },
       "fieldConfig": {
         "defaults": {
@@ -564,7 +585,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -576,6 +598,10 @@
               {
                 "id": "unit",
                 "value": "m"
+              },
+              {
+                "id": "custom.width",
+                "value": 110
               }
             ]
           },
@@ -591,19 +617,47 @@
               },
               {
                 "id": "unit",
-                "value": "lengthm"
+                "value": "lengthkm"
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Dénivelé Moyen"
+              "options": "Déniv Moyen"
             },
             "properties": [
               {
                 "id": "unit",
                 "value": "lengthm"
+              },
+              {
+                "id": "custom.width",
+                "value": 114
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Nbre courses"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Nom"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
               }
             ]
           }
@@ -626,9 +680,10 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": []
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -638,7 +693,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom\", COUNT(*) AS \"Nombre de courses\" ,AVG(act.elevation_gain) AS \"Dénivelé Moyen\",  AVG(act.time_run) AS \"Temps Moyen\", AVG(act.distance_run) AS \"Distance moyenne\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom\"\nORDER BY \"Nombre de courses\" DESC;",
+          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom\", COUNT(*) AS \"Nbre courses\" ,AVG(act.elevation_gain) AS \"Déniv Moyen\",  AVG(act.time_run) AS \"Temps Moyen\", AVG(act.distance_run) AS \"Distance moyenne\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom\"\nORDER BY \"Nbre courses\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -684,7 +739,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -724,7 +780,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -761,8 +817,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "name": "PostgreSQL"
       },
       "fieldConfig": {
         "defaults": {
@@ -815,13 +871,14 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 24,
+        "h": 12,
+        "w": 16,
         "x": 0,
         "y": 12
       },
@@ -841,13 +898,13 @@
       "targets": [
         {
           "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "name": "PostgreSQL"
+            "name": "PostgreSQL",
+            "type": "grafana-postgresql-datasource"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
+          "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\",\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Nicolas B.') OVER (ORDER BY date) AS \"Nicolas\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -873,8 +930,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "name": "PostgreSQL"
       },
       "fieldConfig": {
         "defaults": {
@@ -926,15 +983,16 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 24,
-        "x": 0,
-        "y": 25
+        "h": 12,
+        "w": 8,
+        "x": 16,
+        "y": 12
       },
       "id": 11,
       "options": {
@@ -958,7 +1016,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(elevation_gain AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
+          "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(elevation_gain AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\",\n       SUM(CAST(elevation_gain AS numeric)) FILTER (WHERE a.id = 'Nicolas B.') OVER (ORDER BY date) AS \"Nicolas\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1012,7 +1070,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1033,7 +1092,7 @@
         "h": 11,
         "w": 5,
         "x": 0,
-        "y": 38
+        "y": 24
       },
       "id": 1,
       "options": {
@@ -1049,7 +1108,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -1111,8 +1170,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "name": "PostgreSQL"
       },
       "fieldConfig": {
         "defaults": {
@@ -1135,7 +1194,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1161,6 +1221,18 @@
                 "value": "m"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "D+ Total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "lengthm"
+              }
+            ]
           }
         ]
       },
@@ -1168,7 +1240,7 @@
         "h": 11,
         "w": 19,
         "x": 5,
-        "y": 38
+        "y": 24
       },
       "id": 10,
       "options": {
@@ -1183,7 +1255,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.1",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -1193,7 +1265,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", SUM(CAST(act.distance_run AS DECIMAL)) AS \"Distance Totale\",SUM(CAST(act.time_run AS DECIMAL)) AS \"Temps Total\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom Athlète\"\nORDER BY \"Distance Totale\" DESC;",
+          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", SUM(CAST(act.distance_run AS DECIMAL)) AS \"Distance Totale\", SUM(CAST(act.elevation_gain AS DECIMAL)) AS \"D+ Total\",SUM(CAST(act.time_run AS DECIMAL)) AS \"Temps Total\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom Athlète\"\nORDER BY \"Distance Totale\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1228,9 +1300,9 @@
     "to": "2024-08-31T21:59:59.000Z"
   },
   "timepicker": {},
-  "timezone": "E",
+  "timezone": "",
   "title": "Performances Challenge",
   "uid": "bdhx3k1spuupsa",
-  "version": 2,
+  "version": 8,
   "weekStart": ""
 }

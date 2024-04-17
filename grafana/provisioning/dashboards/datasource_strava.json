@@ -1,0 +1,771 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 4,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "aliasColors": {
+          "heartrate": "red",
+          "velocity_smooth": "blue"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "grafana-strava-datasource",
+          "uid": "grafana-strava-datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 7,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "hiddenSeries": false,
+        "id": 2,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:97",
+            "alias": "velocity_smooth",
+            "fill": 0,
+            "fillGradient": 0,
+            "linewidth": 1,
+            "yaxis": 2
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "activityData": "graph",
+            "activityGraph": "heartrate",
+            "activityId": "$Activity",
+            "activityType": "Run",
+            "datasource": {
+              "type": "grafana-strava-datasource",
+              "uid": "grafana-strava-datasource"
+            },
+            "fitToTimeRange": true,
+            "queryType": "Activity",
+            "refId": "A",
+            "selectedActivity": {
+              "description": "Variable",
+              "label": "$Activity",
+              "value": "$Activity"
+            }
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Heart Rate",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:132",
+            "format": "short",
+            "logBase": 1,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:133",
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "aliasColors": {
+          "Afternoon Run": "red",
+          "average_heartrate": "red",
+          "heartrate": "red",
+          "velocity_smooth": "blue"
+        },
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "grafana-strava-datasource",
+          "uid": "grafana-strava-datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 7,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "hiddenSeries": false,
+        "id": 7,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 2,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": false
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:97",
+            "alias": "velocity_smooth",
+            "fill": 0,
+            "fillGradient": 0,
+            "linewidth": 1,
+            "yaxis": 2
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "activityData": "splits",
+            "activityGraph": "heartrate",
+            "activityId": "$Activity",
+            "activityType": "Run",
+            "datasource": {
+              "type": "grafana-strava-datasource",
+              "uid": "grafana-strava-datasource"
+            },
+            "fitToTimeRange": true,
+            "queryType": "Activity",
+            "refId": "A",
+            "selectedActivity": {
+              "description": "Variable",
+              "label": "$Activity",
+              "value": "$Activity"
+            },
+            "splitStat": "average_heartrate"
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Heart Rate Splits",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:132",
+            "format": "short",
+            "logBase": 1,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:133",
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "aliasColors": {
+          "heartrate": "red",
+          "speed": "blue",
+          "velocity_smooth": "blue"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "grafana-strava-datasource",
+          "uid": "grafana-strava-datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "velocityms",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 7,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "hiddenSeries": false,
+        "id": 6,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:97",
+            "alias": "velocity_smooth",
+            "fill": 0,
+            "fillGradient": 0,
+            "linewidth": 1,
+            "yaxis": 1
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "activityData": "graph",
+            "activityGraph": "velocity_smooth",
+            "activityId": "$Activity",
+            "activityType": "Run",
+            "datasource": {
+              "type": "grafana-strava-datasource",
+              "uid": "grafana-strava-datasource"
+            },
+            "fitToTimeRange": true,
+            "hide": false,
+            "queryType": "Activity",
+            "refId": "B",
+            "selectedActivity": {
+              "description": "Variable",
+              "label": "$Activity",
+              "value": "$Activity"
+            }
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Speed",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:132",
+            "format": "velocitykmh",
+            "logBase": 1,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:133",
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "aliasColors": {
+          "Afternoon Run": "red",
+          "average_heartrate": "red",
+          "average_speed": "blue",
+          "heartrate": "red",
+          "velocity_smooth": "blue"
+        },
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "grafana-strava-datasource",
+          "uid": "grafana-strava-datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 7,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "hiddenSeries": false,
+        "id": 8,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 2,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": false
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:97",
+            "alias": "velocity_smooth",
+            "fill": 0,
+            "fillGradient": 0,
+            "linewidth": 1,
+            "yaxis": 2
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "activityData": "splits",
+            "activityGraph": "heartrate",
+            "activityId": "$Activity",
+            "activityType": "Run",
+            "datasource": {
+              "type": "grafana-strava-datasource",
+              "uid": "grafana-strava-datasource"
+            },
+            "fitToTimeRange": true,
+            "queryType": "Activity",
+            "refId": "A",
+            "selectedActivity": {
+              "description": "Variable",
+              "label": "$Activity",
+              "value": "$Activity"
+            },
+            "splitStat": "average_speed"
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Speed Splits",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:132",
+            "format": "short",
+            "logBase": 1,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:133",
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "aliasColors": {
+          "heartrate": "red",
+          "velocity_smooth": "blue"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "grafana-strava-datasource",
+          "uid": "grafana-strava-datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 0,
+        "fillGradient": 7,
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "hiddenSeries": false,
+        "id": 9,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": false
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:97",
+            "alias": "velocity_smooth",
+            "fill": 0,
+            "fillGradient": 0,
+            "linewidth": 1,
+            "yaxis": 1
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "activityData": "graph",
+            "activityGraph": "altitude",
+            "activityId": "$Activity",
+            "activityType": "Run",
+            "datasource": {
+              "type": "grafana-strava-datasource",
+              "uid": "grafana-strava-datasource"
+            },
+            "fitToTimeRange": true,
+            "hide": false,
+            "queryType": "Activity",
+            "refId": "B",
+            "selectedActivity": {
+              "description": "Variable",
+              "label": "$Activity",
+              "value": "$Activity"
+            }
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Altitude",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:132",
+            "format": "lengthm",
+            "logBase": 1,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:133",
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "aliasColors": {
+          "heartrate": "red",
+          "velocity_smooth": "blue",
+          "watts_calc": "orange"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "grafana-strava-datasource",
+          "uid": "grafana-strava-datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "watt",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 0,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "hiddenSeries": false,
+        "id": 10,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": false
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:97",
+            "alias": "velocity_smooth",
+            "fill": 0,
+            "fillGradient": 0,
+            "linewidth": 1,
+            "yaxis": 1
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "activityData": "graph",
+            "activityGraph": "watts_calc",
+            "activityId": "$Activity",
+            "activityType": "Run",
+            "datasource": {
+              "type": "grafana-strava-datasource",
+              "uid": "grafana-strava-datasource"
+            },
+            "fitToTimeRange": true,
+            "hide": false,
+            "queryType": "Activity",
+            "refId": "B",
+            "selectedActivity": {
+              "description": "Variable",
+              "label": "$Activity",
+              "value": "$Activity"
+            },
+            "splitStat": "moving_time"
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Est. Power (Cycling)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:132",
+            "format": "watt",
+            "logBase": 1,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:133",
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false
+          },
+          "datasource": {
+            "type": "grafana-strava-datasource",
+            "uid": "grafana-strava-datasource"
+          },
+          "definition": "Strava - activity",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "Activity",
+          "options": [],
+          "query": {
+            "activityType": "",
+            "queryType": "activity"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Strava Activity Analysis",
+    "uid": "StravaActivityAnalysis-v1",
+    "version": 1,
+    "weekStart": ""
+  }

@@ -31,6 +31,7 @@ git clone https://github.com/TheoLaperrouse/StravaChallenge.git
 -   `POSTGRES_USER` : le nom d'utilisateur de la base de données Postgresql.
 -   `POSTGRES_PASSWORD` : le mot de passe de la base de données Postgresql.
 -   `POSTGRES_DB` : le nom de la base de données Postgresql.
+-   `POSTGRES_HOST` : le nom de la base de données Postgresql.
 -   `PGADMIN_DEFAULT_EMAIL` : l'email pour accéder à pgAdmin
 -   `PGADMIN_DEFAULT_PASSWORD` : le mot de passe pour accéder à pgAdmin
 
