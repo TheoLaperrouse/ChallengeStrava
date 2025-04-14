@@ -12,10 +12,13 @@ const pool = new pg.Pool({
 });
 
 export async function addPoints(data, activity) {
-    const query = `INSERT INTO ${
-        activity === 'run' ? 'activities' : 'bikeActivities'
-    } (athlete_id, distance_run, time_run, speed_run, elevation_gain, date) VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (athlete_id, distance_run, time_run) DO NOTHING;`;
-
+    const tableName = activity === 'run' ? 'activities' : 'bikeActivities';
+    const query = `
+        INSERT INTO "${tableName}" 
+        (athlete_id, distance_run, time_run, speed_run, elevation_gain, date) 
+        VALUES ($1, $2, $3, $4, $5, $6) 
+        ON CONFLICT (athlete_id, distance_run, time_run) DO NOTHING;
+    `;
     try {
         for (const result of data) {
             const values = [
