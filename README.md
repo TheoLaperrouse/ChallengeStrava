@@ -28,6 +28,7 @@ git clone https://github.com/TheoLaperrouse/StravaChallenge.git
 
 - `STRAVA_CLIENT_ID` : l'identifiant de votre application Strava.
 - `STRAVA_CLIENT_SECRET` : le secret de votre application Strava.
+- `STRAVA_CLUB_ID` : le club strava d'où importer les activités
 - `POSTGRES_USER` : le nom d'utilisateur de la base de données Postgresql.
 - `POSTGRES_PASSWORD` : le mot de passe de la base de données Postgresql.
 - `POSTGRES_DB` : le nom de la base de données Postgresql.
@@ -47,7 +48,7 @@ docker compose up
 
 ## Fonctionnement
 
-L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes`, `activities`.
+L'application récupère les données des activités Strava pour chaque participant au challenge et les stocke dans la base de données Postgresql. Les données sont stockées dans les tables `athletes`, `runActivities`, `bikeActivities`.
 
 La table `athletes` stocke les informations de chaque athlète :
 
@@ -55,12 +56,22 @@ La table `athletes` stocke les informations de chaque athlète :
 - `first_name` : prénom de l'athlète.
 - `last_name` : nom de famille de l'athlète.
 
-La table `activities` stocke les performances de chaque athlète :
+La table `runActivities` stocke les performances de chaque athlète :
 
 - `id` : identifiant unique de la performance
 - `athlete_id` : identifiant de l'athlète
-- `distance_run` : distance de la course
-- `time_run` : temps de la course
-- `speed_run` : vitesse de la course
+- `distance` : distance de la course
+- `time` : temps de la course
+- `speed` : vitesse de la course
+- `elevation_gain` : dénivelé positif
+- `date` : date de la course
+
+La table `bikeActivities` stocke les performances de chaque athlète :
+
+- `id` : identifiant unique de la performance
+- `athlete_id` : identifiant de l'athlète
+- `distance` : distance de la course
+- `time` : temps de la course
+- `speed` : vitesse de la course
 - `elevation_gain` : dénivelé positif
 - `date` : date de la course

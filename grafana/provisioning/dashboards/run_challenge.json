@@ -140,9 +140,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -158,7 +156,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance_run::numeric) AS \"Distance Max\", MAX(a.time_run::numeric) AS \"Temps Max\", MAX(a.elevation_gain::numeric) AS \"D+ max\", AVG(a.speed_run::numeric) AS \"Vitesse Moyenne\"\nFROM activities a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Distance Max\" DESC;",
+          "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance::numeric) AS \"Distance Max\", MAX(a.time::numeric) AS \"Temps Max\", MAX(a.elevation_gain::numeric) AS \"D+ max\", AVG(a.speed::numeric) AS \"Vitesse Moyenne\"\nFROM \"runActivities\" a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Distance Max\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -316,9 +314,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -334,7 +330,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT r.date AS \"Heure de la course\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", r.distance_run AS \"Distance\",r.time_run AS \"Temps\",r.speed_run AS \"Vitesse\",r.elevation_gain AS \"Dénivelé positif\" FROM activities r JOIN athletes a ON r.athlete_id = a.id ORDER BY r.date DESC LIMIT 10;",
+          "rawSql": "SELECT r.date AS \"Heure de la course\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", r.distance AS \"Distance\",r.time AS \"Temps\",r.speed AS \"Vitesse\",r.elevation_gain AS \"Dénivelé positif\" FROM \"runActivities\" r JOIN athletes a ON r.athlete_id = a.id ORDER BY r.date DESC LIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -411,9 +407,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -431,7 +425,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT SUM(time_run) AS total_distance FROM activities;",
+          "rawSql": "SELECT SUM(time) AS total_distance FROM \"runActivities\";",
           "refId": "A",
           "sql": {
             "columns": [
@@ -512,9 +506,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -532,7 +524,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT SUM(time_run) AS total_distance FROM activities;",
+          "rawSql": "SELECT SUM(time) AS total_distance FROM \"runActivities\";",
           "refId": "A",
           "sql": {
             "columns": [
@@ -674,9 +666,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -692,7 +682,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom\", COUNT(*) AS \"Nbre courses\", AVG(act.elevation_gain) AS \"Déniv Moyen\", AVG(act.time_run) AS \"Temps Moyen\", AVG(act.distance_run) AS \"Distance moyenne\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom\"\nORDER BY \"Nbre courses\" DESC;",
+          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom\", COUNT(*) AS \"Nbre courses\", AVG(act.elevation_gain) AS \"Déniv Moyen\", AVG(act.time) AS \"Temps Moyen\", AVG(act.distance) AS \"Distance moyenne\"\nFROM athletes a\nJOIN \"runActivities\" act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom\"\nORDER BY \"Nbre courses\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -769,9 +759,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -789,7 +777,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT AVG(speed_run) AS avg_vitesse FROM activities;",
+          "rawSql": "SELECT AVG(speed) AS avg_vitesse FROM \"runActivities\";",
           "refId": "A",
           "sql": {
             "columns": [
@@ -903,7 +891,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "WITH cumulative_data AS (\n    SELECT\n        date,\n        a.id,\n        CONCAT(a.first_name, ' ', a.last_name) AS athlete_name,\n        SUM(CAST(distance_run AS numeric)) OVER (PARTITION BY a.id ORDER BY date) AS cumulative_distance\n    FROM athletes a\n    JOIN activities ac ON a.id = ac.athlete_id\n)\nSELECT\n    date,\n    jsonb_object_agg(athlete_name, cumulative_distance) AS athletes_data\nFROM cumulative_data\nGROUP BY date\nORDER BY date;",
+          "rawSql": "WITH cumulative_data AS (\n    SELECT\n        date,\n        a.id,\n        CONCAT(a.first_name, ' ', a.last_name) AS athlete_name,\n        SUM(CAST(distance AS numeric)) OVER (PARTITION BY a.id ORDER BY date) AS cumulative_distance\n    FROM athletes a\n    JOIN \"runActivities\" ac ON a.id = ac.athlete_id\n)\nSELECT\n    date,\n    jsonb_object_agg(athlete_name, cumulative_distance) AS athletes_data\nFROM cumulative_data\nGROUP BY date\nORDER BY date;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1025,7 +1013,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "WITH cumulative_data AS (\n    SELECT\n        date,\n        a.id,\n        CONCAT(a.first_name, ' ', a.last_name) AS athlete_name,\n        SUM(CAST(elevation_gain AS numeric)) OVER (PARTITION BY a.id ORDER BY date) AS cumulative_elevation\n    FROM athletes a\n    JOIN activities ac ON a.id = ac.athlete_id\n)\nSELECT\n    date,\n    jsonb_object_agg(athlete_name, cumulative_elevation) AS athletes_data\nFROM cumulative_data\nGROUP BY date\nORDER BY date;",
+          "rawSql": "WITH cumulative_data AS (\n    SELECT\n        date,\n        a.id,\n        CONCAT(a.first_name, ' ', a.last_name) AS athlete_name,\n        SUM(CAST(elevation_gain AS numeric)) OVER (PARTITION BY a.id ORDER BY date) AS cumulative_elevation\n    FROM athletes a\n    JOIN \"runActivities\" ac ON a.id = ac.athlete_id\n)\nSELECT\n    date,\n    jsonb_object_agg(athlete_name, cumulative_elevation) AS athletes_data\nFROM cumulative_data\nGROUP BY date\nORDER BY date;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1118,9 +1106,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -1238,9 +1224,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -1255,7 +1239,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", \n       SUM(CAST(act.distance_run AS DECIMAL)) AS \"Distance Totale\", \n       SUM(CAST(act.elevation_gain AS DECIMAL)) AS \"D+ Total\",\n       SUM(CAST(act.time_run AS DECIMAL)) AS \"Temps Total\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom Athlète\"\nORDER BY \"Distance Totale\" DESC;",
+          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", \n       SUM(CAST(act.distance AS DECIMAL)) AS \"Distance Totale\", \n       SUM(CAST(act.elevation_gain AS DECIMAL)) AS \"D+ Total\",\n       SUM(CAST(act.time AS DECIMAL)) AS \"Temps Total\"\nFROM athletes a\nJOIN \"runActivities\" act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom Athlète\"\nORDER BY \"Distance Totale\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1293,7 +1277,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Challenge",
+  "title": "Run Challenge",
   "uid": "bdhx3k1spuupsa",
   "version": 10
 }

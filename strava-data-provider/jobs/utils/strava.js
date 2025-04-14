@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const BASE_STRAVA_API_URL = 'https://www.strava.com/api/v3';
-export const CLUB_ID = 'thorignettrunningclub';
+export const CLUB_ID = process.env.STRAVA_CLUB_ID;
 
 export async function refreshAccessToken(refresh_token) {
     const response = await fetch('https://www.strava.com/oauth/token', {

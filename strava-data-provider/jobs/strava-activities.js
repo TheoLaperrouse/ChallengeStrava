@@ -12,9 +12,9 @@ const processActivities = (activities, athleteIds, sportTypes) => {
             if (athleteIds.includes(fullName) && sportTypes.includes(activity.sport_type)) {
                 return {
                     athleteId: fullName,
-                    distance_run: (activity.distance / 1000).toFixed(2),
-                    time_run: (activity.moving_time / 60).toFixed(2),
-                    speed_run: ((activity.distance / activity.moving_time) * 3.6).toFixed(2),
+                    distance: (activity.distance / 1000).toFixed(2),
+                    time: (activity.moving_time / 60).toFixed(2),
+                    speed: ((activity.distance / activity.moving_time) * 3.6).toFixed(2),
                     elevation_gain: activity.total_elevation_gain,
                     date: moment().format('YYYY-MM-DD HH:00:00'),
                 };

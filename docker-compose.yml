@@ -1,48 +1,48 @@
 services:
-    grafana:
-        build: grafana
-        environment:
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
-            POSTGRES_HOST: ${POSTGRES_HOST}
-            GF_PATHS_PROVISIONING: '/etc/grafana/provisioning'
-            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: '/etc/grafana/provisioning/dashboards/perfs.json'
-            GF_INSTALL_PLUGINS: grafana-strava-datasource
-            GF_FEATURE_TOGGLES_ENABLE: externalServiceAccounts
-        ports:
-            - '3000:3000'
-        volumes:
-            - ./grafana/provisioning:/etc/grafana/provisioning
-            - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini
-        # depends_on:
-        #     - postgres
+  grafana:
+    build: grafana
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      GF_PATHS_PROVISIONING: "/etc/grafana/provisioning"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/etc/grafana/provisioning/dashboards/run_challenge.json"
+      GF_INSTALL_PLUGINS: grafana-strava-datasource
+      GF_FEATURE_TOGGLES_ENABLE: externalServiceAccounts
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini
+    # depends_on:
+    #     - postgres
 
-    strava-data-provider:
-        build: strava-data-provider
-        environment:
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
-            POSTGRES_HOST: ${POSTGRES_HOST}
-            STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
-            STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
-            STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
-        # depends_on:
-        #     - postgres
+  strava-data-provider:
+    build: strava-data-provider
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
+      STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
+      STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
+      STRAVA_CLUB_ID: ${STRAVA_CLUB_ID}
+    # depends_on:
+    #     - postgres
 
-    # Don't forget to desactivate ssl on datasource if you enable local db
-    # postgres:
-    #     image: postgres:latest
-    #     environment:
-    #         POSTGRES_USER: ${POSTGRES_USER}
-    #         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    #         POSTGRES_DB: ${POSTGRES_DB}
-    #     ports:
-    #         - '5432:5432'
-    #     volumes:
-    #         - postgres_data:/var/lib/postgresql/data
-    #         - ./db-init-scripts:/docker-entrypoint-initdb.d
-    
+  # Don't forget to desactivate ssl on datasource if you enable local db
+  # postgres:
+  #     image: postgres:latest
+  #     environment:
+  #         POSTGRES_USER: ${POSTGRES_USER}
+  #         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #         POSTGRES_DB: ${POSTGRES_DB}
+  #     ports:
+  #         - '5432:5432'
+  #     volumes:
+  #         - postgres_data:/var/lib/postgresql/data
+  #         - ./db-init-scripts:/docker-entrypoint-initdb.d
 # volumes:
 # postgres_data:
