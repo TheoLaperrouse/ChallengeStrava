@@ -15,17 +15,17 @@
       }
     ]
   },
+  "description": "Challenge Strava",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "name": "PostgreSQL"
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -33,7 +33,7 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "left",
             "cellOptions": {
               "type": "auto"
             },
@@ -44,16 +44,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -64,7 +62,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 109
+                "value": 112
               },
               {
                 "id": "unit",
@@ -80,7 +78,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 171
+                "value": 136
               }
             ]
           },
@@ -96,7 +94,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 99
+                "value": 91
               }
             ]
           },
@@ -124,15 +122,15 @@
               },
               {
                 "id": "custom.width",
-                "value": 67
+                "value": 75
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
-        "w": 8,
+        "h": 5,
+        "w": 9,
         "x": 0,
         "y": 0
       },
@@ -150,28 +148,22 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance_run::numeric) AS \"Distance Max\",  MAX(a.time_run::numeric) AS \"Temps Max\",  MAX(a.elevation_gain::numeric) AS \"D+ max\", AVG(a.speed_run::numeric) AS \"Vitesse Moyenne\"\nFROM activities a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Distance Max\" DESC;",
+          "rawSql": "SELECT CONCAT(ath.first_name, ' ', ath.last_name) AS \"Nom Athlète\", MAX(a.distance_run::numeric) AS \"Distance Max\", MAX(a.time_run::numeric) AS \"Temps Max\", MAX(a.elevation_gain::numeric) AS \"D+ max\", AVG(a.speed_run::numeric) AS \"Vitesse Moyenne\"\nFROM activities a\nJOIN athletes ath ON ath.id = a.athlete_id\nGROUP BY ath.id, ath.first_name, ath.last_name\nORDER BY \"Distance Max\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
               {
-                "name": "MAX",
-                "parameters": [
-                  {
-                    "name": "distance_run",
-                    "type": "functionParameter"
-                  }
-                ],
+                "parameters": [],
                 "type": "function"
               }
             ],
@@ -184,16 +176,16 @@
               }
             ],
             "limit": 50
-          },
-          "table": "activities"
+          }
         }
       ],
+      "title": "",
       "type": "table"
     },
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "name": "PostgreSQL"
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -201,7 +193,7 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "left",
             "cellOptions": {
               "type": "auto"
             },
@@ -212,16 +204,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -233,6 +223,10 @@
               {
                 "id": "unit",
                 "value": "velocitykmh"
+              },
+              {
+                "id": "custom.width",
+                "value": 85
               }
             ]
           },
@@ -264,7 +258,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 111
+                "value": 80
               }
             ]
           },
@@ -295,13 +289,25 @@
                 "value": "lengthm"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Nom Athlète"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 12,
-        "w": 11,
-        "x": 8,
+        "w": 10,
+        "x": 9,
         "y": 0
       },
       "id": 3,
@@ -318,17 +324,17 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT r.date AS \"Heure de la course\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", r.distance_run AS \"Distance\",r.time_run AS \"Temps\",r.speed_run AS \"Vitesse\",r.elevation_gain AS \"Dénivelé positif\"\nFROM activities r\nJOIN athletes a ON r.athlete_id = a.id\nORDER BY r.date DESC\nLIMIT 10;",
+          "rawSql": "SELECT r.date AS \"Heure de la course\", CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", r.distance_run AS \"Distance\",r.time_run AS \"Temps\",r.speed_run AS \"Vitesse\",r.elevation_gain AS \"Dénivelé positif\" FROM activities r JOIN athletes a ON r.athlete_id = a.id ORDER BY r.date DESC LIMIT 10;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -346,8 +352,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "results"
+          }
         }
       ],
       "title": "Dernière Courses",
@@ -355,8 +360,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -368,16 +373,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -406,6 +409,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -417,17 +421,17 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT SUM(CAST(distance_run AS numeric)) AS total_distance\nFROM activities;",
+          "rawSql": "SELECT SUM(time_run) AS total_distance FROM activities;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -445,8 +449,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "activities"
+          }
         }
       ],
       "title": "Kilomètres totaux",
@@ -454,8 +457,8 @@
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -467,8 +470,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -479,8 +481,7 @@
                 "value": 85
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -509,6 +510,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -520,12 +522,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
@@ -548,8 +550,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "activities"
+          }
         }
       ],
       "title": "Temps total",
@@ -558,7 +559,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "name": "PostgreSQL"
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -566,7 +567,7 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "left",
             "cellOptions": {
               "type": "auto"
             },
@@ -577,16 +578,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -601,7 +600,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 110
+                "value": 87
               }
             ]
           },
@@ -645,7 +644,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 107
+                "value": 33
               }
             ]
           },
@@ -657,17 +656,17 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 124
+                "value": 133
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 6,
-        "w": 8,
+        "h": 7,
+        "w": 9,
         "x": 0,
-        "y": 6
+        "y": 5
       },
       "id": 9,
       "options": {
@@ -683,17 +682,17 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom\", COUNT(*) AS \"Nbre courses\" ,AVG(act.elevation_gain) AS \"Déniv Moyen\",  AVG(act.time_run) AS \"Temps Moyen\", AVG(act.distance_run) AS \"Distance moyenne\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom\"\nORDER BY \"Nbre courses\" DESC;",
+          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom\", COUNT(*) AS \"Nbre courses\", AVG(act.elevation_gain) AS \"Déniv Moyen\", AVG(act.time_run) AS \"Temps Moyen\", AVG(act.distance_run) AS \"Distance moyenne\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom\"\nORDER BY \"Nbre courses\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -714,12 +713,13 @@
           }
         }
       ],
+      "title": "",
       "type": "table"
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -731,16 +731,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -769,6 +767,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -780,17 +779,17 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT AVG(speed_run) AS avg_vitesse\nFROM activities;",
+          "rawSql": "SELECT AVG(speed_run) AS avg_vitesse FROM activities;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -808,8 +807,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "activities"
+          }
         }
       ],
       "title": "Vitesse moyenne",
@@ -818,7 +816,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "name": "PostgreSQL"
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -832,6 +830,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -867,12 +866,10 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -891,20 +888,22 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\",\n       SUM(CAST(distance_run AS numeric)) FILTER (WHERE a.id = 'Nicolas B.') OVER (ORDER BY date) AS \"Nicolas\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
+          "rawSql": "WITH cumulative_data AS (\n    SELECT\n        date,\n        a.id,\n        CONCAT(a.first_name, ' ', a.last_name) AS athlete_name,\n        SUM(CAST(distance_run AS numeric)) OVER (PARTITION BY a.id ORDER BY date) AS cumulative_distance\n    FROM athletes a\n    JOIN activities ac ON a.id = ac.athlete_id\n)\nSELECT\n    date,\n    jsonb_object_agg(athlete_name, cumulative_distance) AS athletes_data\nFROM cumulative_data\nGROUP BY date\nORDER BY date;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -926,12 +925,21 @@
         }
       ],
       "title": "Distance Cumulative par athlète",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "source": "athletes_data"
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "name": "PostgreSQL"
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -945,6 +953,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "opacity",
@@ -979,12 +988,10 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -1003,20 +1010,22 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT a.first_name, a.last_name, date,\n       SUM(CAST(elevation_gain AS numeric)) FILTER (WHERE a.id = 'Theo L.') OVER (ORDER BY date) AS \"Théo\",\n       SUM(CAST(elevation_gain AS numeric)) FILTER (WHERE a.id = 'Nicolas B.') OVER (ORDER BY date) AS \"Nicolas\"\nFROM athletes a\nJOIN activities ac ON a.id = ac.athlete_id\nORDER BY date;",
+          "rawSql": "WITH cumulative_data AS (\n    SELECT\n        date,\n        a.id,\n        CONCAT(a.first_name, ' ', a.last_name) AS athlete_name,\n        SUM(CAST(elevation_gain AS numeric)) OVER (PARTITION BY a.id ORDER BY date) AS cumulative_elevation\n    FROM athletes a\n    JOIN activities ac ON a.id = ac.athlete_id\n)\nSELECT\n    date,\n    jsonb_object_agg(athlete_name, cumulative_elevation) AS athletes_data\nFROM cumulative_data\nGROUP BY date\nORDER BY date;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1038,12 +1047,23 @@
         }
       ],
       "title": "Dénivelé Positif Cumulatif par athlète",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "auto",
+            "jsonPaths": [],
+            "source": "athletes_data"
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
       "datasource": {
-        "name": "PostgreSQL",
-        "type": "grafana-postgresql-datasource"
+        "type": "grafana-postgresql-datasource",
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -1051,7 +1071,7 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "left",
             "cellOptions": {
               "type": "auto"
             },
@@ -1062,16 +1082,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -1090,7 +1108,7 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 5,
+        "w": 8,
         "x": 0,
         "y": 24
       },
@@ -1108,47 +1126,22 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "format": "table",
-          "rawSql": "SELECT id AS \"Id Strava\", first_name AS \"Prénom\", last_name AS \"Nom\" FROM athletes LIMIT 50 ",
+          "rawQuery": true,
+          "rawSql": "SELECT id AS \"Id Strava\", first_name AS \"Prénom\", last_name AS \"Nom\" FROM athletes LIMIT 50",
           "refId": "A",
           "sql": {
             "columns": [
               {
-                "alias": "\"Id Strava\"",
-                "parameters": [
-                  {
-                    "name": "id",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "alias": "\"Prénom\"",
-                "parameters": [
-                  {
-                    "name": "first_name",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "alias": "\"Nom\"",
-                "parameters": [
-                  {
-                    "name": "last_name",
-                    "type": "functionParameter"
-                  }
-                ],
+                "parameters": [],
                 "type": "function"
               }
             ],
@@ -1161,8 +1154,7 @@
               }
             ],
             "limit": 50
-          },
-          "table": "athletes"
+          }
         }
       ],
       "title": "Athlètes",
@@ -1171,7 +1163,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "name": "PostgreSQL"
+        "uid": "PCC52D03280B7034C"
       },
       "fieldConfig": {
         "defaults": {
@@ -1190,12 +1182,10 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -1238,8 +1228,8 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 19,
-        "x": 5,
+        "w": 16,
+        "x": 8,
         "y": 24
       },
       "id": 10,
@@ -1255,17 +1245,17 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
-            "name": "PostgreSQL",
-            "type": "grafana-postgresql-datasource"
+            "type": "grafana-postgresql-datasource",
+            "uid": "PCC52D03280B7034C"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", SUM(CAST(act.distance_run AS DECIMAL)) AS \"Distance Totale\", SUM(CAST(act.elevation_gain AS DECIMAL)) AS \"D+ Total\",SUM(CAST(act.time_run AS DECIMAL)) AS \"Temps Total\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom Athlète\"\nORDER BY \"Distance Totale\" DESC;",
+          "rawSql": "SELECT CONCAT(a.first_name, ' ', a.last_name) AS \"Nom Athlète\", \n       SUM(CAST(act.distance_run AS DECIMAL)) AS \"Distance Totale\", \n       SUM(CAST(act.elevation_gain AS DECIMAL)) AS \"D+ Total\",\n       SUM(CAST(act.time_run AS DECIMAL)) AS \"Temps Total\"\nFROM athletes a\nJOIN activities act ON act.athlete_id = a.id\nGROUP BY a.id, \"Nom Athlète\"\nORDER BY \"Distance Totale\" DESC;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1286,23 +1276,24 @@
           }
         }
       ],
+      "title": "",
       "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "2024-04-03T22:00:00.000Z",
-    "to": "2024-08-31T21:59:59.000Z"
+    "from": "2025-04-30T22:00:00.000Z",
+    "to": "2025-08-31T21:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Performances Challenge",
+  "title": "Challenge",
   "uid": "bdhx3k1spuupsa",
-  "version": 8,
-  "weekStart": ""
+  "version": 10
 }
