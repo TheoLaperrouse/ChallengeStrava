@@ -4,6 +4,7 @@ datasources:
   - name: PostgreSQL
     type: postgres
     orgId: 1
+    uid: "PCC52D03280B7034C"
     url: ${POSTGRES_HOST}:5432
     user: ${POSTGRES_USER}
     secureJsonData:
